@@ -41,11 +41,21 @@ int main(int argc, char const *argv[]) {
   void *p = &i;       // 任何非常量对象的地址都可以存放在void*指针中
   // p = ri;             // 错误，不能将const int&转换为void*
   cout << ri << endl;
+
   // 强制类型转换
   double slope = static_cast<double>(i) / j;
   cout << slope << endl;
   double *dp = static_cast<double *>(p);
   // const类型转换
+  const int *cpi = &i;
+  // *cpi = 2;
+  int *pi = const_cast<int *>(cpi);
+  *pi = 2;
+  cout << *pi << endl;
+  // 旧式的转换方法
+  int *ip;
+  char *pc = reinterpret_cast<char *>(ip);
+  pc = (char *)ip;
 
   return 0;
 }
