@@ -52,9 +52,10 @@ int main(int argc, char const *argv[]) {
   int *pi = const_cast<int *>(cpi);
   *pi = 2;
   cout << *pi << endl;
-  // 旧式的转换方法
   int *ip;
   char *pc = reinterpret_cast<char *>(ip);
+  // 旧式的转换方法
+  // 这时，与上面的语句等价
   pc = (char *)ip;
 
   return 0;
