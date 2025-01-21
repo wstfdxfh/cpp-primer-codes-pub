@@ -1,1 +1,3 @@
-# cpp-primer-exercises-pub
+# cpp-primer-codes-pub
+
+Contains some codes and exercises in C++ Primer.
