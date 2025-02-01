@@ -43,5 +43,7 @@
         "typeinfo": "cpp",
         "cassert": "cpp",
         "bitset": "cpp"
-    }
+    },
+    "editor.lineHeight": 1.3,
+    "debug.console.lineHeight": 0
 }
