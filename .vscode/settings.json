@@ -42,6 +42,11 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "cassert": "cpp",
-        "bitset": "cpp"
-    }
+        "bitset": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp"
+    },
+    "editor.lineHeight": 1.3,
+    "debug.console.lineHeight": 0
 }
