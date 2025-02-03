@@ -45,7 +45,10 @@
         "bitset": "cpp",
         "forward_list": "cpp",
         "list": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "numeric": "cpp"
     },
     "editor.lineHeight": 1.3,
     "debug.console.lineHeight": 0
