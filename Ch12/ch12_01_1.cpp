@@ -43,7 +43,8 @@ string &StrBlob::front() {
 }
 
 const string &StrBlob::front() const {
-  return const_cast<const string &>(front());
+  check(0, "front on empty StrBlob");
+  return data->front();
 }
 
 string &StrBlob::back() {
@@ -52,7 +53,8 @@ string &StrBlob::back() {
 }
 
 const string &StrBlob::back() const {
-  return const_cast<const string &>(back());
+  check(0, "back on empty StrBlob");
+  return data->back();
 }
 
 void StrBlob::pop_back() {
