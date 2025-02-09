@@ -12,6 +12,7 @@
 
 using namespace std;
 
+// 相较于默认的swap函数，内存开销更小
 inline void swap(HasPtr &lhs, HasPtr &rhs) {
   // using std::swap;
   swap(lhs.ps, rhs.ps);
