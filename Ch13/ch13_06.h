@@ -1,5 +1,5 @@
-#ifndef CH1305H
-#define CH1305H
+#ifndef CH1306H
+#define CH1306H
 
 #include <string>
 
@@ -9,10 +9,11 @@ class Strvec {
   Strvec(const Strvec &);  // 拷贝构造函数
   // 接收initializer_list的构造函数
   Strvec(std::initializer_list<std::string>);
-  Strvec &operator=(const Strvec &);    // 拷贝赋值运算符
-  ~Strvec();                            // 析构函数
-  void push_back(const std::string &);  // 拷贝元素
-  void push_back(std::string &&);       // 移动元素
+  Strvec(Strvec &&) noexcept;             // 移动构造函数
+  Strvec &operator=(const Strvec &);      // 拷贝赋值运算符
+  Strvec &operator=(Strvec &&) noexcept;  // 移动赋值运算符
+  ~Strvec();                              // 析构函数
+  void push_back(const std::string &);    // 拷贝元素
   size_t size() const { return first_free - elements; }
   size_t capacity() const { return cap - elements; }  // 容量
   std::string *begin() const { return elements; }

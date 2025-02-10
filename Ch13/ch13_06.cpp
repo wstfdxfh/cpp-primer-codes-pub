@@ -1,4 +1,4 @@
-#include "ch13_05.h"
+#include "ch13_06.h"
 
 #include <algorithm>
 #include <fstream>
@@ -10,18 +10,13 @@
 #include <string>
 #include <utility>
 #include <vector>
+
 using namespace std;
 
 void Strvec::push_back(const string &s) {
   chk_n_alloc();
   // 在first_free指向的元素中构造s的副本
   alloc.construct(first_free++, s);
-}
-
-void Strvec::push_back(string &&s) {
-  chk_n_alloc();
-  // 在first_free指向的元素中构造s的副本
-  alloc.construct(first_free++, std::move(s));
 }
 
 pair<string *, string *> Strvec::alloc_n_copy(const string *b,
@@ -65,6 +60,18 @@ Strvec &Strvec::operator=(const Strvec &rhs) {
   return *this;
 }
 
+Strvec &Strvec::operator=(Strvec &&rhs) noexcept {
+  // 直接检测自赋值
+  if (this != &rhs) {
+    free();
+    elements = rhs.elements;
+    first_free = rhs.first_free;
+    cap = rhs.cap;
+    rhs.elements = rhs.first_free = rhs.cap = nullptr;
+  }
+  return *this;
+}
+
 void Strvec::reallocate() {
   // 我们将分配当前大小两倍的内存空间
   auto newcapacity = size() ? 2 * size() : 1;
@@ -87,6 +94,12 @@ Strvec::Strvec(initializer_list<string> il) {
   auto newdata = alloc_n_copy(il.begin(), il.end());
   elements = newdata.first;
   first_free = cap = newdata.second;
+}
+
+Strvec::Strvec(Strvec &&s) noexcept
+    : elements(s.elements), first_free(s.first_free), cap(s.cap) {
+  // 将s置于可析构的状态
+  s.elements = s.first_free = s.cap = nullptr;
 }
 
 void Strvec::reserve(size_t n) {
@@ -124,8 +137,12 @@ void Strvec::resize(size_t n) {
 allocator<string> Strvec::alloc = allocator<string>();
 
 int main() {
-  Strvec v{"a", "b", "c"};
-  Strvec v2 = v;
-  cout << "v2.size() = " << v2.size() << ", v2.back() = " << v2.back() << endl;
+  // 右值引用 只能绑定到将要销毁的对象
+  int i = 42;
+  const int &rl = i * 42;
+  int &&ri = i * 10;
+  // 获得一个左值的右值引用
+  int &&rr = std::move(ri);
+
   return 0;
 }

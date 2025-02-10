@@ -13,7 +13,9 @@ class Message {
  public:
   explicit Message(const std::string &str = "") : contents(str) {}
   Message(const Message &);
+  Message(Message &&);
   Message &operator=(const Message &);
+  Message &operator=(Message &&);
   ~Message();
 
   // 从给定Folder添加/删除本Message
@@ -27,6 +29,7 @@ class Message {
   std::set<Folder *> folders;
   void add_to_Folders(const Message &);
   void remove_from_Folders();
+  void move_Folders(Message *);
 };
 
 class Folder {

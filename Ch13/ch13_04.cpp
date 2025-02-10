@@ -69,6 +69,30 @@ void Folder::addMsg(Message *m) { messages.insert(m); }
 
 void Folder::remMsg(Message *m) { messages.erase(m); }
 
+void Message::move_Folders(Message *m) {
+  // 返回m的folders的右值引用
+  folders = std::move(m->folders);
+  for (auto f : folders) {
+    f->remMsg(m);
+    f->addMsg(this);
+  }
+  // 确保销毁m是无害的
+  m->folders.clear();
+}
+
+Message::Message(Message &&m) : contents(std::move(m.contents)) {
+  move_Folders(&m);
+}
+
+Message &Message::operator=(Message &&rhs) {
+  if (this != &rhs) {
+    remove_from_Folders();
+    contents = std::move(rhs.contents);
+    move_Folders(&rhs);
+  }
+  return *this;
+}
+
 int main() {
   Folder f1, f2;
   Message m1(string("This is an message.")), m2(string("Another message."));
