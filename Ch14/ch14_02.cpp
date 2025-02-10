@@ -8,6 +8,8 @@ class Employee {
    */
   friend std::ostream &operator<<(std::ostream &os, const Employee &emp);
   friend std::istream &operator>>(std::istream &is, Employee &emp);
+  friend bool operator==(const Employee &, const Employee &);
+  friend bool operator!=(const Employee &, const Employee &);
 
  private:
   std::string name;
@@ -48,9 +50,19 @@ std::istream &operator>>(std::istream &is, Employee &emp) {
   return is;
 }
 
+bool operator==(const Employee &emp1, const Employee &emp2) {
+  return emp1.id == emp2.id && emp1.name == emp2.name;
+}
+
+bool operator!=(const Employee &emp1, const Employee &emp2) {
+  return !(emp1 == emp2);
+}
+
 int main() {
   Employee emp;
   std::cin >> emp;
   std::cout << emp << std::endl;
+  Employee emp2 = emp;
+  std::cout << (emp == emp2) << std::endl;
   return 0;
 }
