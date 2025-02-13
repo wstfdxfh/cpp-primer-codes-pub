@@ -62,6 +62,9 @@ void StrBlob::pop_back() {
   data->pop_back();
 }
 
+template <typename T>
+using twin = pair<T, T>;
+
 int main() {
   shared_ptr<string> p1;
   p1 = make_shared<string>(10, '9');
@@ -77,6 +80,8 @@ int main() {
     b2.push_back("about");
   }
   cout << b1.size() << endl;
+
+  twin<string> authors = {"James", "Joyce"};
 
   return 0;
 }
