@@ -2,5 +2,9 @@
 
 #include <iostream>
 #include <string>
+#include <unordered_set>
 
-int main() { return 0; }
+int main() {
+  std::unordered_multiset<Sales_data> sales_data_set;
+  return 0;
+}
