@@ -19,6 +19,13 @@ void printHello() {
 }  // namespace fourthEd
 }  // namespace cpp_primer
 
+namespace ns {
+class A {};
+void display(const A& a) { cout << "display A" << endl; }
+}  // namespace ns
+
+class dA : public ns::A {};
+
 int main() {
   cpp_primer::printHello();
   cpp_primer::fourthEd::printHello();
@@ -26,6 +33,10 @@ int main() {
 
   namespace fed = cpp_primer::fourthEd;
   fed::printHello();
+
+  dA da;
+  // 会在当前作用域、参数的类作用域以及基类作用域中查找
+  display(da);
 
   return 0;
 }
