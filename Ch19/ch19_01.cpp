@@ -19,11 +19,24 @@ void* operator new(size_t size) {
 // 2.使用operator delete释放空间
 void operator delete(void* mem) noexcept { free(mem); }
 
+struct Point {
+  double x, y;
+};
+
 int main() {
   void* p = malloc(4);
   new (p) int(42);
   std::cout << "*p = " << *(static_cast<int*>(p)) << std::endl;
   // 释放内存时，先调用析构函数，再释放内存
   free(p);
+
+  void* p2 = malloc(sizeof(Point));
+  new (p2) Point{1.0, 2.0};
+  std::cout << "p2 = " << (static_cast<Point*>(p2))->x << ", "
+            << (static_cast<Point*>(p2))->y << std::endl;
+  // 释放内存时，先调用析构函数，再释放内存
+  static_cast<Point*>(p2)->~Point();  // 显式调用析构函数
+  free(p2);
+
   return 0;
 }
