@@ -49,7 +49,16 @@
     "functional": "cpp",
     "iterator": "cpp",
     "numeric": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "bit": "cpp",
+    "compare": "cpp",
+    "concepts": "cpp",
+    "ctime": "cpp",
+    "unordered_set": "cpp",
+    "random": "cpp",
+    "regex": "cpp",
+    "iomanip": "cpp",
+    "ranges": "cpp"
   },
   "editor.lineHeight": 1.3,
   "debug.console.lineHeight": 0,
