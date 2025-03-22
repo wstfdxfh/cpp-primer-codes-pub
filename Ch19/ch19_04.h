@@ -13,8 +13,8 @@ class Screen {
   char get() const { return contents[cursor]; }
 
  private:
-  std::string contents;  // 内容
-  pos cursor;            // 光标位置
+  std::string contents = std::string("Hello");  // 内容
+  pos cursor = 0;                               // 光标位置
 };
 
 #endif  // CH19_04_H
